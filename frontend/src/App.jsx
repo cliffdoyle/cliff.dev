@@ -1,5 +1,7 @@
 import {useState,useEffect} from 'react';
 import axios from 'axios';
+//Import the new component
+import ProjectCard from './components/projectCard';
 function App() {
   //State to store our projects
   const [projects, setProjects] = useState([]);
@@ -22,21 +24,23 @@ function App() {
     fetchProjects();
 
   },[])//The empty array ensures this effect runs only once
- return (
-    <>
-      <h1>My Portfolio</h1>
-      <h2>Projects</h2>
-      <div className="project-list">
-        {projects.map(project => (
-          <div key={project.id} className="project-card">
-            <h3>{project.title}</h3>
-            <p>{project.description}</p>
-            {/* We'll add the image and links later */}
-          </div>
-        ))}
-      </div>
-    </>
-  )
+  return (
+    <div className="app-container">
+      <header>
+        <h1>My Portfolio</h1>
+        <p>A collection of my work.</p>
+      </header>
+      <main>
+        <h2>Projects</h2>
+        <div className="project-list">
+          {projects.map(project => (
+            // Use our new component here and pass the project data to it
+            <ProjectCard key={project.id} project={project} />
+          ))}
+        </div>
+      </main>
+    </div>
+  );
   
 }
 
