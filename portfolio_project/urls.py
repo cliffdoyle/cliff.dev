@@ -17,6 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
+from django.urls import path, include
+ 
+from django.conf import settings
+from django.conf.urls.static import static
+
 urlpatterns = [
     path('admin/', admin.site.urls),
+    #Tells Django how to handle requests coming from this endpoint
+    path('api/',include('api.urls')),
 ]
+
+#Allows development server to find and show uploaded images
+urlpatterns += static(settings.MEDIA_URL,
+document_root=settings.MEDIA_ROOT)
