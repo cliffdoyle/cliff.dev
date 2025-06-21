@@ -41,10 +41,19 @@ INSTALLED_APPS = [
     #3rd party apps
     'rest_framework',
     'corsheaders',
+    'django_filters',
 
     #Local apps
     'api',
+
+    
 ]
+
+REST_FRAMEWORK = {
+    'DEFAULT_FILTER_BACKENDS': [
+        'django_filters.rest_framework.DjangoFilterBackend'
+    ],
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

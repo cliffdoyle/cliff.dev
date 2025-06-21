@@ -3,6 +3,7 @@
 from rest_framework import viewsets
 from rest_framework.decorators import action # Import action
 from rest_framework.response import Response # Import Response
+from .filters import ProjectFilter, ArticleFilter
 
 from .models import Project, Article, TechnologyTag
 from .serializers import ProjectSerializer, ArticleSerializer, TechnologyTagSerializer
@@ -10,6 +11,7 @@ from .serializers import ProjectSerializer, ArticleSerializer, TechnologyTagSeri
 class ProjectViewSet(viewsets.ModelViewSet):
     queryset = Project.objects.all().order_by('-date_created')
     serializer_class = ProjectSerializer
+    filterset_class=ProjectFilter
 
     # This creates a new custom endpoint at /api/projects/featured/
     @action(detail=False, methods=['get'])
@@ -23,6 +25,8 @@ class ArticleViewSet(viewsets.ModelViewSet):
     queryset = Article.objects.filter(status='published').order_by('-published_date')
     serializer_class = ArticleSerializer
     lookup_field = 'slug'
+    # filterset_fields=['tags_name'] #Allow filtering by tag name
+    filterset_class=ArticleFilter
 
     # This creates a new custom endpoint at /api/articles/featured/
     @action(detail=False, methods=['get'])
