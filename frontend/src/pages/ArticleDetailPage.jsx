@@ -1,50 +1,81 @@
-// src/pages/ArticleDetailPage.jsx
+// CORRECTED - src/pages/ArticleDetailPage.jsx
+
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
-import parse from 'html-react-parser'; // We'll install this next
+import parse, { domToReact } from 'html-react-parser'; // Make sure domToReact is imported
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'; 
+import AuthorBio from '../components/AuthorBio'
 
 const ArticleDetailPage = () => {
     const [article, setArticle] = useState(null);
-    const { slug } = useParams(); // Get the 'slug' from the URL
+    const { slug } = useParams();
 
     useEffect(() => {
         const fetchArticle = async () => {
             try {
-                // Fetch the single article using its slug
                 const response = await axios.get(`http://127.0.0.1:8000/api/articles/${slug}/`);
                 setArticle(response.data);
             } catch (error) {
                 console.error('Error fetching article details:', error);
             }
         };
-
         fetchArticle();
-    }, [slug]); // Re-run the effect if the slug changes
-
-    if (!article) {
-        return <div>Loading...</div>; // Show a loading message
-    }
+    }, [slug]);
     
-    const imageUrl = `http://127.0.0.1:8000${article.featured_image}`;
+    // --- THIS IS THE FIX ---
+    // Define the 'options' object in the main component scope
+    const options = {
+        replace: ({ name, attribs, children }) => {
+            // Find code blocks formatted by CKEditor
+            if (name === 'pre' && children[0]?.name === 'code') {
+                const codeElement = children[0];
+                const lang = codeElement.attribs.class?.replace('language-', '') || 'plaintext';
+                // Use domToReact to properly get the text content
+                const codeText = domToReact(codeElement.children).toString() || '';
 
-    return (
-        <article className="article-detail">
-            <h1>{article.title}</h1>
+                return (
+                    <SyntaxHighlighter language={lang} style={a11yDark} showLineNumbers>
+                        {String(codeText).replace(/\n$/, '')}
+                    </SyntaxHighlighter>
+                );
+            }
+            // Add a rule to add a class to external links
+            if (name === 'a' && attribs.href) {
+                if (attribs.href.startsWith('http')) {
+                    attribs.target = '_blank';
+                    attribs.rel = 'noopener noreferrer';
+                    attribs.class = 'external-link';
+                }
+            }
+        },
+    };
+
+    if (!article) return <div>Loading...</div>;
+    
+  return (
+    <article className="article-detail">
+        <header className="article-header">
+          <h1>{article.title}</h1>
+          <div className="article-meta">
+            {/* Check if the author exists before displaying */}
+            {article.author_username && <p className="article-author">By {article.author_username}</p>}
             <p className="article-date">
               Published on {new Date(article.published_date).toLocaleDateString(
                   'en-US', { year: 'numeric', month: 'long', day: 'numeric' }
               )}
             </p>
-            {article.featured_image && 
-              <img src={imageUrl} alt={article.title} className="article-detail-image" />
-            }
-            <div className="article-content">
-              {/* This will safely render the HTML from our rich text editor */}
-              {parse(article.content)} 
-            </div>
-        </article>
-    );
+          </div>
+        </header>
+        
+        <div className="article-content">
+          {parse(article.content, options)} 
+        </div>
+            {article && <AuthorBio article={article} />}
+        
+    </article>
+);
 };
 
 export default ArticleDetailPage;

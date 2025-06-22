@@ -9,39 +9,28 @@ import PortfolioPage from './pages/PortfolioPage';
 import BlogPage from './pages/BlogPage';
 import ArticleDetailPage from './pages/ArticleDetailPage';
 
-import './index.css'; // Your main stylesheet
+import './index.css';
 
-// This is our main layout component
+// The AppLayout component lives right here.
 const AppLayout = () => (
   <>
     <Navbar />
-    <main className="app-container">
-        <Outlet /> {/* This is where the page content will be rendered */}
+    {/* This <main> tag is the wrapper we need */}
+    <main className="app-container"> 
+        <Outlet /> {/* This renders the content of the current page */}
     </main>
+    {/* We can add a Footer component here later */}
   </>
 );
 
 const router = createBrowserRouter([
   {
     element: <AppLayout />,
-    // Add an error element page later
     children: [
-      {
-        path: '/',
-        element: <HomePage />,
-      },
-      {
-        path: '/portfolio',
-        element: <PortfolioPage />,
-      },
-      {
-        path: '/blog',
-        element: <BlogPage />,
-      },
-      {
-        path: '/blog/:slug', // The :slug part is a URL parameter
-        element: <ArticleDetailPage />,
-      },
+      { path: '/', element: <HomePage /> },
+      { path: '/portfolio', element: <PortfolioPage /> },
+      { path: '/blog', element: <BlogPage /> },
+      { path: '/blog/:slug', element: <ArticleDetailPage /> },
     ],
   },
 ]);

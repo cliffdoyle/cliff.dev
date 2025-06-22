@@ -203,14 +203,54 @@ main {
   margin-bottom: 1rem;
 }
 
+.article-meta {
+  color: #888;
+  font-size: 0.9rem;
+  margin-top: 0;
+}
+
+/* This targets ALL content inside the article body */
+.article-content {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+}
+
+/* This specifically targets images uploaded via the CKEditor */
+.article-content img {
+    max-width: 100%;
+    height: auto; /* Maintain aspect ratio */
+    border-radius: 8px;
+    margin: 2rem 0; /* Add space around images */
+}
+
+/* This ensures our code blocks look great and don't break the layout */
+.article-content pre {
+  border-radius: 8px; /* Match our site's style */
+  font-size: 0.9rem;
+}
+
 
 /* Single Article Detail Page */
 .article-detail {
-    max-width: 800px;
+    /* max-width: 100%; */
     margin: 2rem auto;
     background-color: #fff;
     padding: 2rem;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    box-sizing: border-box;
+}
+
+.article-header {
+  border-bottom: 1px solid #eee;
+  padding-bottom: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.article-header h1 {
+    font-size: 2.8rem;
+    margin-bottom: 0.5rem;
+    line-height: 1.2;
 }
 
 .article-detail h1 {
@@ -330,4 +370,54 @@ main {
   background-color: #7F5AF0;
   color: #fff;
   border-color: #7F5AF0;
+}
+
+/* Main App Container */
+.app-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+/* Add this CSS to src/index.css */
+
+/* Author Bio Box at the end of articles */
+.author-bio-box {
+  margin-top: 4rem;
+  padding-top: 2rem;
+  border-top: 1px solid #eee;
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.author-image {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%; /* Makes it a circle */
+  object-fit: cover;
+}
+
+.author-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.author-written-by {
+  margin: 0;
+  color: #999;
+  font-size: 0.8rem;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+}
+
+.author-name {
+  margin: 0.25rem 0;
+  font-size: 1.25rem;
+}
+
+.author-bio {
+  margin: 0;
+  color: #666;
+  font-size: 0.95rem;
 }

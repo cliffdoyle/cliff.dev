@@ -15,6 +15,11 @@ class ProjectSerializer(serializers.ModelSerializer):
 
 class ArticleSerializer(serializers.ModelSerializer):
     tags = TechnologyTagSerializer(many=True, read_only=True)
+    author_username = serializers.CharField(source='author.username', read_only=True)
+
+    author_image = serializers.ImageField(source='author.profile.profile_image', read_only=True)
+    author_bio = serializers.CharField(source='author.profile.bio', read_only=True)
     class Meta:
         model = Article
-        fields = '__all__'
+        fields = ['id', 'title', 'slug', 'content', 'status', 'featured_image', 'tags', 
+                  'published_date', 'author_username', 'author_image', 'author_bio']

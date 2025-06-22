@@ -1,4 +1,6 @@
 from django.db import models
+from ckeditor.fields import RichTextField
+from django.contrib.auth.models import User
 
 # Create your models here.
 class TechnologyTag(models.Model):
@@ -29,10 +31,12 @@ class Article(models.Model):
     )
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    content = models.TextField()
+    content = RichTextField(config_name='devto-style')
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, default='draft')
     featured_image = models.ImageField(null=True, blank=True, upload_to='articles/')
     tags = models.ManyToManyField(TechnologyTag, blank=True)
+    published_date = models.DateTimeField(auto_now_add=True)
+    author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='articles')
     published_date = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -40,5 +44,14 @@ class Article(models.Model):
 
     def __str__(self):
         return self.title
+    
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_image = models.ImageField(upload_to='profiles/', null=True, blank=True)
+    bio = models.TextField(null=True, blank=True)
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
     
 

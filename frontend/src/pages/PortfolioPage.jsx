@@ -13,7 +13,7 @@ const PortfolioPage = () => {
         // Build the URL based on whether a tag is selected
         let projectsUrl = 'http://127.0.0.1:8000/api/projects/';
         if (selectedTag) {
-            projectsUrl += `?tags__name=${selectedTag}`;
+            projectsUrl += `?tags=${selectedTag}`;
         }
         
         axios.get(projectsUrl)
