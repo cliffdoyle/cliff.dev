@@ -8,25 +8,30 @@ const PortfolioPage = () => {
     const [tags, setTags] = useState([]);
     const [selectedTag, setSelectedTag] = useState(null);
 
+     // --- EFFECT #1: Fetch tags only ONCE when the component first loads ---
     useEffect(() => {
-        // --- Fetch Projects ---
-        // Build the URL based on whether a tag is selected
+        axios.get('http://127.0.0.1:8000/api/tags/')
+            .then(response => {
+                setTags(response.data);
+            })
+            .catch(error => console.error('Error fetching tags:', error));
+    }, []); // Note the EMPTY dependency array []
+
+    
+    // --- EFFECT #2: Fetch projects whenever the selectedTag changes ---
+    useEffect(() => {
         let projectsUrl = 'http://127.0.0.1:8000/api/projects/';
         if (selectedTag) {
             projectsUrl += `?tags=${selectedTag}`;
         }
         
         axios.get(projectsUrl)
-            .then(response => setProjects(response.data))
+            .then(response => {
+                setProjects(response.data);
+            })
             .catch(error => console.error('Error fetching projects:', error));
 
-        // --- Fetch Tags (only once) ---
-        if (tags.length === 0) {
-            axios.get('http://127.0.0.1:8000/api/tags/')
-                .then(response => setTags(response.data))
-                .catch(error => console.error('Error fetching tags:', error));
-        }
-    }, [selectedTag]); // <-- Re-run the effect when selectedTag changes!
+    }, [selectedTag]); // This effect ONLY depends on selectedTag
 
     return (
         <main>

@@ -421,3 +421,35 @@ main {
   color: #666;
   font-size: 0.95rem;
 }
+
+/* Add this to index.css */
+.placeholder-image {
+    width: 100%;
+    height: 180px; /* Same height as your actual images */
+    background-color: #f0f2f5; /* A light grey color */
+}
+
+.article-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+/* --- ADD THIS NEW RULE --- */
+.article-card-image {
+  width: 100%; /* Make the image take the full width of the card */
+  height: 180px; /* Give it a fixed height */
+  object-fit: cover; /* This makes the image cover the area without distortion */
+}
+
+/* Add this rule if it doesn't exist, or make sure it's correct */
+.project-card img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.placeholder-image {
+    width: 100%;
+    background-color: #f0f2f5;
+    /* height is set by component style prop */
+}

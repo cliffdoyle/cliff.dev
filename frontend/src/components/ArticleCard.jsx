@@ -6,13 +6,20 @@ const ArticleCard = ({ article }) => {
   const formattedDate = new Date(article.published_date).toLocaleDateString(
     'en-US', { year: 'numeric', month: 'long', day: 'numeric' }
   );
-  const imageUrl = `http://127.0.0.1:8000${article.featured_image}`;
+  // const imageUrl = `http://127.0.0.1:8000${article.featured_image}`;
 
   return (
     <Link to={`/blog/${article.slug}`} className="article-card-link">
       <div className="article-card">
-        {article.featured_image && (
-          <img src={imageUrl} alt={article.title} className="article-card-image" />
+         {article.featured_image ? (
+          <img 
+            src={`http://127.0.0.1:8000${article.featured_image}`} 
+            alt={article.title} 
+            className="article-card-image" 
+          />
+        ) : (
+          // Optional: Render a placeholder if no image exists
+          <div className="placeholder-image"></div>
         )}
         <div className="article-card-content">
           <h3>{article.title}</h3>

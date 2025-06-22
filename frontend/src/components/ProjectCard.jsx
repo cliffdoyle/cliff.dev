@@ -3,11 +3,19 @@
 // We pass 'project' as a prop from App.jsx
 const ProjectCard = ({ project }) => {
   // Construct the full image URL
-  const imageUrl = `http://127.0.0.1:8000${project.featured_image}`;
+  // const imageUrl = `http://127.0.0.1:8000${project.featured_image}`;
 
   return (
     <div className="project-card">
-      <img src={imageUrl} alt={project.title} />
+       {project.featured_image ? (
+        <img
+          src={`http://127.0.0.1:8000${project.featured_image}`}
+          alt={project.title}
+        />
+      ) : (
+        // You can add a placeholder for projects too if you like
+        <div className="placeholder-image" style={{height: '200px'}}></div>
+      )}
       <div className="card-content">
         <h3>{project.title}</h3>
         <p>{project.description}</p>

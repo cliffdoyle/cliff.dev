@@ -8,26 +8,29 @@ const BlogPage = () => {
     const [articles, setArticles] = useState([]);
     const [tags, setTags] = useState([]);
     const [selectedTag, setSelectedTag] = useState(null);
-
+ // --- EFFECT #1: Fetch tags only ONCE ---
     useEffect(() => {
-        // Fetch articles, applying filter if a tag is selected
+        axios.get('http://127.0.0.1:8000/api/tags/')
+            .then(response => {
+                setTags(response.data);
+            })
+            .catch(error => console.error('Error fetching tags:', error));
+    }, []); // Empty dependency array []
+
+    // --- EFFECT #2: Fetch articles when selectedTag changes ---
+    useEffect(() => {
         let articlesUrl = 'http://127.0.0.1:8000/api/articles/';
         if (selectedTag) {
             articlesUrl += `?tags=${selectedTag}`;
         }
 
         axios.get(articlesUrl)
-            .then(response => setArticles(response.data))
+            .then(response => {
+                setArticles(response.data);
+            })
             .catch(error => console.error('Error fetching articles:', error));
 
-        // Fetch all tags for the filter buttons (only runs once)
-        if (tags.length === 0) {
-            axios.get('http://127.0.0.1:8000/api/tags/')
-                .then(response => setTags(response.data))
-                .catch(error => console.error('Error fetching tags:', error));
-        }
-    }, [selectedTag]); // Re-run when the selected tag changes
-
+    }, [selectedTag]); // Dependency on selectedTag
     return (
         <main>
             <h2>My Blog</h2>
