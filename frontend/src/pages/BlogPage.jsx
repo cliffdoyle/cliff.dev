@@ -55,7 +55,7 @@ const BlogPage = () => {
                 ))}
             </div>
 
-            <div className="article-list">
+            <div className="item-grid">
                 {articles.map(article => (
                     <ArticleCard key={article.id} article={article} />
                 ))}

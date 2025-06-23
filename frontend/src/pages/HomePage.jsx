@@ -32,17 +32,17 @@ const HomePage = () => {
     return (
         <div>
             <Hero />
-            <section className="featured-section">
-                <h2>Featured Projects</h2>
-                <div className="project-list">
+            <section className="home-section">
+                <h2 className='section-title'>Featured Projects</h2>
+                <div className="item-grid">
                     {featuredProjects.map(project => (
                         <ProjectCard key={project.id} project={project} />
                     ))}
                 </div>
             </section>
-            <section className="featured-section">
-                <h2>Latest Articles</h2>
-                <div className="article-list">
+            <section className="home-section">
+                <h2 className='section-title'> Latest Articles</h2>
+                <div className="item-grid">
                     {latestArticles.map(article => (
                         <ArticleCard key={article.id} article={article} />
                     ))}

@@ -56,7 +56,7 @@ const PortfolioPage = () => {
                 ))}
             </div>
             
-            <div className="project-list">
+            <div className="item-grid">
                 {projects.map(project => (
                     <ProjectCard key={project.id} project={project} />
                 ))}
