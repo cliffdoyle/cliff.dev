@@ -7,10 +7,11 @@ const ProjectCard = ({ project }) => {
 
   return (
     <div className="project-card">
-       {project.featured_image ? (
+       {project.featured_image_url ? (
         <img
-          src={`http://127.0.0.1:8000${project.featured_image}`}
+          src={project.featured_image_url}
           alt={project.title}
+          className="project-card-image"
         />
       ) : (
         // You can add a placeholder for projects too if you like

@@ -6,12 +6,12 @@ const AuthorBio = ({ article }) => {
     return null;
   }
   
-  const imageUrl = `http://127.0.0.1:8000${article.author_image}`;
+  // const imageUrl = `http://127.0.0.1:8000${article.author_image}`;
 
   return (
     <div className="author-bio-box">
-      {article.author_image && (
-        <img src={imageUrl} alt={article.author_username} className="author-image" />
+      {article.author_image_url && (
+        <img src={article.author_image_url} alt={article.author_username} className="author-image" />
       )}
       <div className="author-info">
         <p className="author-written-by">WRITTEN BY</p>

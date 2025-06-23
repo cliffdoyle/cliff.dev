@@ -37,7 +37,7 @@ class Article(models.Model):
     tags = models.ManyToManyField(TechnologyTag, blank=True)
     published_date = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='articles')
-    published_date = models.DateTimeField(auto_now_add=True)
+
 
     class Meta:
         ordering = ['-published_date']

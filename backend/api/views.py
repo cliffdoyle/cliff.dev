@@ -13,6 +13,10 @@ class ProjectViewSet(viewsets.ModelViewSet):
     serializer_class = ProjectSerializer
     filterset_class=ProjectFilter
 
+       # We need to override get_serializer_context to add the request
+    def get_serializer_context(self):
+        return {'request': self.request}
+
     # This creates a new custom endpoint at /api/projects/featured/
     @action(detail=False, methods=['get'])
     def featured(self, request):
@@ -27,6 +31,9 @@ class ArticleViewSet(viewsets.ModelViewSet):
     lookup_field = 'slug'
     # filterset_fields=['tags_name'] #Allow filtering by tag name
     filterset_class=ArticleFilter
+
+    def get_serializer_context(self):
+        return {'request': self.request}
 
     # This creates a new custom endpoint at /api/articles/featured/
     @action(detail=False, methods=['get'])

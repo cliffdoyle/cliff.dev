@@ -11,9 +11,9 @@ const ArticleCard = ({ article }) => {
   return (
     <Link to={`/blog/${article.slug}`} className="article-card-link">
       <div className="article-card">
-         {article.featured_image ? (
+         {article.featured_image_url ? (
           <img 
-            src={`http://127.0.0.1:8000${article.featured_image}`} 
+            src={article.featured_image_url}
             alt={article.title} 
             className="article-card-image" 
           />
