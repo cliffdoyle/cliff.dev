@@ -35,7 +35,11 @@ const PortfolioPage = () => {
 
     return (
         <main>
-            <h2>My Projects</h2>
+
+        <header className="page-header">
+            <h2 className='page-title'>My Projects</h2>
+             <p className="page-subtitle">A showcase of my recent work and personal projects.</p>
+             </header>
 
             {/* --- FILTERING BUTTONS --- */}
             <div className="filter-tags">

@@ -33,8 +33,10 @@ const BlogPage = () => {
     }, [selectedTag]); // Dependency on selectedTag
     return (
         <main>
+            <header className="page-header">
             <h2>My Blog</h2>
-            <p>Thoughts and learnings on technology and development.</p>
+            <p>A collection of articles on software development, system design, and modern technology.</p>
+            </header>
 
             {/* --- FILTERING BUTTONS --- */}
             <div className="filter-tags">
