@@ -50,6 +50,21 @@ return (
       <div className="app-container">
         <div className="filter-tags">
             {/* ... filter buttons are correct ... */}
+            <button
+            onClick={()=>setSelectedTag(null)}
+            className={!selectedTag ? 'active' : ''}
+            >
+                All
+            </button>
+            {tags.map(tag=>(
+                <button
+                key={tag.id}
+                onClick={()=>setSelectedTag(tag.name)}
+                className={selectedTag===tag.name ? 'active' : ''}
+                >
+                    {tag.name}
+                </button>
+            ))}
         </div>
         
         <div className="item-grid">

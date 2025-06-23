@@ -7,7 +7,7 @@ const Navbar = () => {
     <header className="navbar-wrapper">
       {/* The nav itself is the centered container with the items */}
       <nav className="navbar app-container">
-        <NavLink to="/" className="nav-logo">Cliff Omollo</NavLink>
+        <NavLink to="/" className="nav-logo"></NavLink>
         <ul className="nav-menu">
           <li><NavLink to="/portfolio" className="nav-link">Projects</NavLink></li>
           <li><NavLink to="/blog" className="nav-link">Blog</NavLink></li>
