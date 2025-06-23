@@ -1,27 +1,36 @@
-// src/main.jsx
+// FINAL - src/main.jsx
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider, Outlet } from 'react-router-dom';
 
-import Navbar from './components/Navbar';
+// Import components
+import Navbar from './components/Navbar'; // Assuming your Navbar component is separate
+
+// Import all your page components
 import HomePage from './pages/HomePage';
 import PortfolioPage from './pages/PortfolioPage';
 import BlogPage from './pages/BlogPage';
 import ArticleDetailPage from './pages/ArticleDetailPage';
 
+// Import your main stylesheet
 import './index.css';
 
-// The AppLayout component lives right here.
-const AppLayout = () => (
-  <>
-    <Navbar />
-    {/* This <main> tag is the wrapper we need */}
-    <main className="app-container"> 
-        <Outlet /> {/* This renders the content of the current page */}
-    </main>
-    {/* We can add a Footer component here later */}
-  </>
-);
+// This is our "master template" component
+const AppLayout = () => {
+  return (
+    <>
+      <Navbar />
+      <main>
+        <Outlet /> {/* This renders the current page's content */}
+      </main>
+      <footer className="footer">
+        <div className="app-container">
+          <p>© {new Date().getFullYear()} Cliff Omollo. All rights reserved.</p>
+        </div>
+      </footer>
+    </>
+  );
+};
 
 const router = createBrowserRouter([
   {

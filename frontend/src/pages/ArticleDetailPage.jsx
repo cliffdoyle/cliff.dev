@@ -7,6 +7,7 @@ import parse, { domToReact } from 'html-react-parser'; // Make sure domToReact i
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { a11yDark } from 'react-syntax-highlighter/dist/esm/styles/prism'; 
 import AuthorBio from '../components/AuthorBio'
+import BackButton from '../components/BackButton';
 
 const ArticleDetailPage = () => {
     const [article, setArticle] = useState(null);
@@ -55,7 +56,9 @@ const ArticleDetailPage = () => {
     if (!article) return <div>Loading...</div>;
     
   return (
-    <article className="article-detail">
+    
+      <article className="article-detail">
+        <BackButton/>
         <header className="article-header">
           <h1>{article.title}</h1>
           <div className="article-meta">

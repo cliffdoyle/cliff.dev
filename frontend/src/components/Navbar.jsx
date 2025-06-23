@@ -1,15 +1,19 @@
+// FINAL - src/components/Navbar.jsx
 import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   return (
-    <nav className="navbar">
-      <NavLink to="/" className="nav-logo">Home</NavLink>
-      <ul className="nav-menu">
-        <li><NavLink to="/portfolio" className="nav-link">Projects</NavLink></li>
-        <li><NavLink to="/blog" className="nav-link">Blog</NavLink></li>
-        {/* We can add more links here later */}
-      </ul>
-    </nav>
+    // The header is a full-width wrapper for the background and border
+    <header className="navbar-wrapper">
+      {/* The nav itself is the centered container with the items */}
+      <nav className="navbar app-container">
+        <NavLink to="/" className="nav-logo">Cliff Omollo</NavLink>
+        <ul className="nav-menu">
+          <li><NavLink to="/portfolio" className="nav-link">Projects</NavLink></li>
+          <li><NavLink to="/blog" className="nav-link">Blog</NavLink></li>
+        </ul>
+      </nav>
+    </header>
   );
 };
 

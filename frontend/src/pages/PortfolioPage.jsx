@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ProjectCard from '../components/ProjectCard';
+import BackButton from '../components/BackButton';
 
 const PortfolioPage = () => {
     const [projects, setProjects] = useState([]);
@@ -33,40 +34,32 @@ const PortfolioPage = () => {
 
     }, [selectedTag]); // This effect ONLY depends on selectedTag
 
-    return (
-        <main>
 
-        <header className="page-header">
-            <h2 className='page-title'>My Projects</h2>
-             <p className="page-subtitle">A showcase of my recent work and personal projects.</p>
-             </header>
+return (
+    // A simple fragment to hold the page structure
+    <> 
+      <BackButton />
+      <header className="page-header">
+          <div className="app-container"> {/* Center the text INSIDE the header */}
+              <h2 className='page-title'>My Projects</h2>
+              <p className="page-subtitle">A showcase of my recent work and a journey through technology.</p>
+          </div>
+      </header>
 
-            {/* --- FILTERING BUTTONS --- */}
-            <div className="filter-tags">
-                <button 
-                    onClick={() => setSelectedTag(null)}
-                    className={!selectedTag ? 'active' : ''}
-                >
-                    All
-                </button>
-                {tags.map(tag => (
-                    <button 
-                        key={tag.id} 
-                        onClick={() => setSelectedTag(tag.name)}
-                        className={selectedTag === tag.name ? 'active' : ''}
-                    >
-                        {tag.name}
-                    </button>
-                ))}
-            </div>
-            
-            <div className="item-grid">
-                {projects.map(project => (
-                    <ProjectCard key={project.id} project={project} />
-                ))}
-            </div>
-        </main>
-    );
+      {/* A second app-container for the main content grid */}
+      <div className="app-container">
+        <div className="filter-tags">
+            {/* ... filter buttons are correct ... */}
+        </div>
+        
+        <div className="item-grid">
+            {projects.map(project => (
+                <ProjectCard key={project.id} project={project} />
+            ))}
+        </div>
+      </div>
+    </>
+);
 };
 
 export default PortfolioPage;

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
 import ArticleCard from '../components/ArticleCard';
+import BackButton from '../components/BackButton';
 
 const BlogPage = () => {
     const [articles, setArticles] = useState([]);
@@ -32,13 +33,17 @@ const BlogPage = () => {
 
     }, [selectedTag]); // Dependency on selectedTag
     return (
-        <main>
+        <>
+            <BackButton/>
             <header className="page-header">
+                <div className="app-container">
             <h2>My Blog</h2>
             <p>A collection of articles on software development, system design, and modern technology.</p>
+            </div>
             </header>
 
             {/* --- FILTERING BUTTONS --- */}
+              <div className="app-container">
             <div className="filter-tags">
                 <button 
                     onClick={() => setSelectedTag(null)}
@@ -61,8 +66,9 @@ const BlogPage = () => {
                 {articles.map(article => (
                     <ArticleCard key={article.id} article={article} />
                 ))}
+                </div>
             </div>
-        </main>
+        </>
     );
 };
 

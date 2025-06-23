@@ -32,6 +32,7 @@ const HomePage = () => {
     return (
         <div>
             <Hero />
+            <div className="app-container">
             <section className="home-section">
                 <h2 className='section-title'>Featured Projects</h2>
                 <div className="item-grid">
@@ -48,6 +49,7 @@ const HomePage = () => {
                     ))}
                 </div>
             </section>
+            </div>
         </div>
     );
 };
