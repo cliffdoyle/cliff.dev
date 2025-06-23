@@ -82,6 +82,17 @@ body {
 .article-content pre { border-radius: 12px; font-size: 0.95rem; margin-bottom: 1.5em; }
 .author-bio-box { margin-top: 4rem; padding-top: 2.5rem; border-top: 1px solid var(--border-color); display: flex; align-items: center; gap: 1.5rem; }
 .author-image { width: 80px; height: 80px; border-radius: 50%; object-fit: cover; }
+/* Add this rule inside the HERO SECTION block in index.css */
+
+.hero-image {
+  width: 300px;
+  height: 300px;
+  border-radius: 50%; /* Makes it a perfect circle */
+  object-fit: cover; /* Ensures the image fits well without distortion */
+  margin-bottom: 2rem; /* Adds space between the image and the text */
+  border: 5px solid var(--surface); /* A nice white border */
+  box-shadow: 0 10px 30px rgba(var(--shadow-color-rgb), 0.15);
+}
 
 /* Back Button */
 .back-button { position: absolute; top: 110px; left: 2rem; }
